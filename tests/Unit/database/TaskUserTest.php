@@ -19,7 +19,7 @@ class TaskUserTest extends TestCase
     public function testTaskUserTableHasExpectedColumns()
     {
         $this->assertTrue(
-            Schema::hasColumns('task_user', 
+            Schema::hasColumns('task_users', 
                 [
                     "id", "user_id", "task_id", /*"assigned", */
                     "created_at", "updated_at"
@@ -35,7 +35,7 @@ class TaskUserTest extends TestCase
      */
     public function testTaskUserIsSavedInDatabase() {
         $task_user = TaskUser::factory()->create();
-        $this->assertDatabaseHas('task_user', $task_user->attributesToArray());
+        $this->assertDatabaseHas('task_users', $task_user->attributesToArray());
     }
 
 
@@ -49,7 +49,7 @@ class TaskUserTest extends TestCase
 
         $task_user = TaskUser::factory()->create(); 
         $task_user->delete(); 
-        $this->assertDeleted('task_user', $task_user->attributesToArray());
+        $this->assertDeleted('task_users', $task_user->attributesToArray());
     }
         
     /**
