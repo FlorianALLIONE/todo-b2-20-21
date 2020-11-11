@@ -9,12 +9,12 @@ class Task extends Model
 {
     use HasFactory;
 
-    public function categories() {
-        return $this->belongsTo(Category::class);
+    public function assignedUsers() {
+        return $this->hasMany(User::class, 'user_id');
     }
 
-    public function boards() {
-        return $this->belongsTo(Board::class);
+    public function participants() {
+        return $this->hasManyThrough(User::class, 'user_id');
     }
 
     public function attachments() {
@@ -25,7 +25,11 @@ class Task extends Model
         return $this->hasMany(Comment::class);
     }
 
-    public function task_user() {
-        return $this->belongsToMany(User::class);
+    public function category() {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function board() {
+        return $this->belongsTo(Board::class);
     }
 }

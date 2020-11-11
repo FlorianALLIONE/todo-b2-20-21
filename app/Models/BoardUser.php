@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class BoardUser extends Model
 {
     use HasFactory;
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
+
+    public function board() {
+        return $this->belongsTo(Board::class);
+    }
+
+    public function tasks() {
+        return $this->hasMany(Task::class);
+    }
 }
