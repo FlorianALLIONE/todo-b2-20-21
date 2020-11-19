@@ -15,12 +15,14 @@ class CreateBoardsTable extends Migration
     {
         Schema::create('boards', function (Blueprint $table) {
             $table->id();
-            $table->string('title', 30);
+            $table->string('title');
             $table->text('description');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+            
+            // $table->BigInteger('user_id')->unsigned()->index();
+            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            
             $table->timestamps();
-
-            // Import Foreign Key
-            $table->foreignId('user_id')->unique()->constrained()->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

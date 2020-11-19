@@ -22,12 +22,13 @@ class AttachmentFactory extends Factory
     public function definition()
     {
         return [
-            'file' => '01101',
-            'filename' => $this->faker->word,
-            'size' => $this->faker->randomDigit,
-            'type' => $this->faker->mimeType,
+            'file'=> base64_encode($this->faker->text),
+            'filename'=>$this->faker->word,
+            //'filename'=>$this->faker->file('.', ' /Users/quentinmdl/Documents', false),
+            'size'=> rand(0,4096),
+            'type'=>$this->faker->mimeType(),
             'user_id' => \App\Models\User::factory(),
-            'task_id' => \App\Models\Task::factory()
+            'task_id' => \App\Models\Task::factory(),
         ];
     }
 }

@@ -23,7 +23,7 @@ class BoardUserFactory extends Factory
     {
         return [
             'user_id' => \App\Models\User::factory(),
-            'board_id' => \App\Models\Board::factory()
+            'board_id' => \App\Models\Board::factory(),
         ];
     }
 }

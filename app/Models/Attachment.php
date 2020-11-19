@@ -9,11 +9,24 @@ class Attachment extends Model
 {
     use HasFactory;
 
-    public function task() {
-        return $this->belongsTo(Task::class);
+    /**
+     * Renvoi du user par fichier
+     * 
+     * @return use Illuminate\Database\Eloquent\Relations\BelongsTo;
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
-    public function user() {
-        return $this->belongsTo(User::class);
+
+    /**
+     * Renvoi la task du fichier
+     * 
+     * @return use Illuminate\Database\Eloquent\Relations\BelongsTo;
+     */
+    public function task()
+    {
+        return $this->belongsTo(Task::class);
     }
 }

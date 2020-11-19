@@ -9,11 +9,26 @@ class Comment extends Model
 {
     use HasFactory;
 
-    public function user() {
+
+
+    /**
+     * Renvoi le commentaire par user
+     * 
+     * @return use Illuminate\Database\Eloquent\Relations\BelongsTo;
+     */
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 
-    public function task() {
+
+    /**
+     * Renvoi la task avec son commentaire
+     * 
+     * @return use Illuminate\Database\Eloquent\Relations\BelongsTo;
+     */
+    public function task()
+    {
         return $this->belongsTo(Task::class);
     }
 }

@@ -19,7 +19,7 @@ class BoardUserTest extends TestCase
     public function testBoardUserTableHasExpectedColumns()
     {
         $this->assertTrue(
-            Schema::hasColumns('board_users', 
+            Schema::hasColumns('board_user', 
                 [
                     "id", "user_id", "board_id", 
                     "created_at", "updated_at"
@@ -35,7 +35,7 @@ class BoardUserTest extends TestCase
      */
     public function testBoardUserIsSavedInDatabase() {
         $board_user = BoardUser::factory()->create();
-        $this->assertDatabaseHas('board_users', $board_user->attributesToArray());
+        $this->assertDatabaseHas('board_user', $board_user->attributesToArray());
     }
 
 
@@ -49,7 +49,7 @@ class BoardUserTest extends TestCase
 
         $board_user = BoardUser::factory()->create(); 
         $board_user->delete(); 
-        $this->assertDeleted('board_users', $board_user->attributesToArray());
+        $this->assertDeleted('board_user', $board_user->attributesToArray());
     }
         
     /**

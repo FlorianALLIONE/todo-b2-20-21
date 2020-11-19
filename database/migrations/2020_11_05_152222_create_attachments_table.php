@@ -15,15 +15,19 @@ class CreateAttachmentsTable extends Migration
     {
         Schema::create('attachments', function (Blueprint $table) {
             $table->id();
-            $table->string('file');
+            $table->binary('file');
             $table->string('filename');
             $table->float('size');
             $table->string('type');
-            $table->timestamps();
+            $table->foreignId('user_id')->nullable()->constrained()->onDelete('set null');
+            $table->foreignId('task_id')->constrained()->onDelete('cascade');
 
-            // Import Foreign Key
-            $table->foreignId('user_id')->unique()->constrained()->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('task_id')->unique()->constrained()->onDelete('cascade')->onUpdate('cascade');
+            // $table->BigInteger('user_id')->unsigned()->index();
+            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            // $table->BigInteger('task_id')->unsigned()->index();
+            // $table->foreign('task_id')->references('id')->on('tasks')->onDelete('cascade')->onUpdate('cascade');
+            
+            $table->timestamps();
         });
     }
 

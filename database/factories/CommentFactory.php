@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Comment;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class CommentFactory extends Factory
 {
@@ -22,9 +23,9 @@ class CommentFactory extends Factory
     public function definition()
     {
         return [
-            'text' => $this->faker->sentence,
+            'text' =>$this->faker->sentence,
             'user_id' => \App\Models\User::factory(),
-            'task_id' => \App\Models\Task::factory()
+            'task_id' => \App\Models\Task::factory(),
         ];
     }
 }

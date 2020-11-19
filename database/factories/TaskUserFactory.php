@@ -22,8 +22,8 @@ class TaskUserFactory extends Factory
     public function definition()
     {
         return [
+            'user_id' => \App\Models\User::factory(),
             'task_id' => \App\Models\Task::factory(),
-            'user_id' => \App\Models\User::factory()
         ];
     }
 }

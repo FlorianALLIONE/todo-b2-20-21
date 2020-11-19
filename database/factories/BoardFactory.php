@@ -3,8 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\Board;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class BoardFactory extends Factory
 {
@@ -23,9 +23,9 @@ class BoardFactory extends Factory
     public function definition()
     {
         return [
-            'title' => $this->faker->title,
-            'description' => $this->faker->word,
-            'user_id' => \App\Models\User::factory()
+            'title'=>$this->faker->sentence,
+            'description'=>$this->faker->text,             
+            'user_id' => \App\Models\User::factory(),
         ];
     }
 }
