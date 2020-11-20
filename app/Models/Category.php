@@ -15,6 +15,13 @@ class Category extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
+
+
+    /**
+    * Renvoi les categories par task
+    * 
+    * @return use Illuminate\Database\Eloquent\Relations\hasMany;
+    */
     public function tasks()
     {
         return $this->hasMany(Task::class);
