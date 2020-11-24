@@ -77,5 +77,4 @@ class BoardUserTest extends TestCase
         //Aide : 
         $this->assertInstanceOf('\Illuminate\Database\Eloquent\Relations\hasManyThrough', $board_user->tasks());
     }
-
 }
