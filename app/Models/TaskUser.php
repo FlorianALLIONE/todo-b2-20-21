@@ -63,6 +63,4 @@ class TaskUser extends Pivot
     {
         return $this->belongsTo(Task::class);
     }
-
- 
 }

@@ -47,5 +47,4 @@ class BoardUser extends Pivot
     public function tasks() {
         return $this->hasManyThrough(Task::class, Board::class, 'id', 'board_id', 'board_id');
     }
-
 }

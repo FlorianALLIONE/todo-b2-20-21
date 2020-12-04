@@ -92,24 +92,16 @@ class BoardTest extends TestCase
         $this->assertInstanceOf('Illuminate\Database\Eloquent\Relations\Pivot', $board->users()->first()->pivot);
     }
 
-    /**
-     * 
-     * L'utilisateur qui créé un board est aussi participant
-     * 
-     * @return void
-     * 
-     */
     public function testBoardOwnerIsAlsoParticipant() {
-        // On créé un utilisateur
-        $user = User::factory()->create(); 
-        // On créé un board qui appartient à l'utilisateur
+        $user = User::factory()->create();
         $board = Board::factory()->create(['user_id' => $user->id]);
 
-        // Le board crée n'a qu'un seul participant lors de la création du board : son propriétaire
+        //On peut tester le nombre de participant : il doit être = 1 car il n'y a que le proprio qui est participant
         $this->assertEquals($board->users->count(), 1);
 
-        //La table board_user contient bien le board et l'utilisateur
-        $this->assertDatabaseHas('board_user', ['user_id' => $user->id, 'board_id' => $board->id]);
+        //On vérifie que la table correspondant au pivot (BoardUser) contient bien l'id de l'user et du board
+        $board_user = $board->users->find($user->id)->pivot;        
+        $this->assertDatabaseHas('board_user', $board_user);
     }
 
 }
