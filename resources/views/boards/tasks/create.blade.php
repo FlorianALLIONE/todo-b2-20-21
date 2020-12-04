@@ -5,7 +5,7 @@
 
 @section('content')
     <h2>Ajouter une tâche</h2>
-    <form action="/tasks" method="POST">
+    <form action="{{route('boards.tasks.store', $board)}}" method="POST">
         @csrf
         <label for="title">Title</label>
         <input type="text" name='title' id ='title' class="@error('title') is-invalid @enderror" required><br>
@@ -26,12 +26,6 @@
             @endforeach
         </select>
         <br>
-        <label for="board">Board</label>
-        <select name="board_id" id="board_id" required>
-            @foreach($user->boards as $board) 
-                <option value="{{$board->id}}">{{$board->title}}</option>
-            @endforeach
-        </select>
 
         <button type="submit">Save</button>
     </form>

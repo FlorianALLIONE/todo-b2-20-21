@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{ Board, Task };
+use App\Models\{Board, User};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -65,8 +65,12 @@ class BoardController extends Controller
      */
     public function show(Board $board)
     {
-        $task = new Task();
-        return view('boards.show', ['board' => $board, 'task' => $task]);
+        // On récupère les ids des utilisateurs de la board : 
+        $boardUsersIds = $board->users->pluck('id'); 
+        // on récupère ici tous les utilisateurs qui ne sont pas dans la board. 
+        // Notez le get, qui permet d'obtenir la collection (si on ne le met pas, on obtient un query builder mais la requête n'est pas executée)
+        $usersNotInBoard  = User::whereNotIn('id', $boardUsersIds)->get();
+        return view('boards.show', ['board' => $board, 'users' => $usersNotInBoard]);
     }
 
     /**

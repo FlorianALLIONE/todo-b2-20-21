@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\{ BoardController, TaskController, BoardUserController };
+use App\Http\Controllers\{BoardController, BoardUserController, TaskController};
+use App\Models\Board;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,20 +35,10 @@ Route::delete('boards/{board}', [BoardController::class, 'destroy'])->middleware
 
 // Route::resource('boards', BoardController::class);
 
-// CRUD de Task
-Route::get('tasks', [TaskController::class, 'index'])->middleware('auth')->name('tasks.index');
-Route::get('tasks/create', [TaskController::class, 'create'])->middleware('auth')->name('tasks.create');
-Route::post('tasks', [TaskController::class, 'store'])->middleware('auth')->name('tasks.store');
-Route::get('tasks/{task}', [TaskController::class, 'show'])->middleware('auth')->name('tasks.show');
-Route::get('tasks/{task}/edit', [TaskController::class, 'edit'])->middleware('auth')->name('tasks.edit');
-Route::put('tasks/{task}', [TaskController::class, 'update'])->middleware('auth')->name('tasks.update');
-Route::delete('tasks/{task}', [TaskController::class, 'destroy'])->middleware('auth')->name('tasks.destroy');
+Route::resource("/tasks", TaskController::class);
+// Ajout de nouvelles routes pour pouvoir créer la tâche directement depuis le board : 
+Route::get('boards/{board}/tasks/create', [TaskController::class, 'createFromBoard'])->middleware('auth')->name('boards.tasks.create');
+Route::post('boards/{board}/tasks', [TaskController::class, 'storeFromBoard'])->middleware('auth')->name('boards.tasks.store');
 
-// CRUD de BoardUser
-Route::get('boardusers', [BoardUserController::class, 'index'])->middleware('auth')->name('boardusers.index');
-Route::get('boardusers/create', [BoardUserController::class, 'create'])->middleware('auth')->name('boardusers.create');
-Route::post('boardusers', [BoardUserController::class, 'store'])->middleware('auth')->name('boardusers.store');
-Route::get('boardusers/{boardusers}', [BoardUserController::class, 'show'])->middleware('auth')->name('boardusers.show');
-Route::get('boardusers/{boardusers}/edit', [BoardUserController::class, 'edit'])->middleware('auth')->name('boardusers.edit');
-Route::put('boardusers/{boardusers}', [BoardUserController::class, 'update'])->middleware('auth')->name('boardusers.update');
-Route::delete('boardusers/{boardusers}', [BoardUserController::class, 'destroy'])->middleware('auth')->name('boardusers.destroy');
+Route::post('boards/{board}/users', [BoardUserController::class, 'store'])->middleware('auth')->name('boards.users.store');
+Route::delete('boarduser/{BoardUser}', [BoardUserController::class, 'destroy'])->middleware('auth')->name('boards.users.destroy');
